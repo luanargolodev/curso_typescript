@@ -1,20 +1,25 @@
-//@ts-check
-const frase = "Front End";
-const total = 100.05;
-const empresas = ["Apple", "Microsoft"];
-
-frase.toLowerCase();
-
-const t = total.toFixed();
-console.log(t);
-
-empresas.map((empresa) => empresa.toLowerCase());
-
-const body = document.body;
-body.style.background = "#000";
-
-const button = document.querySelector("button");
-// button.click();
-
-const operacao = 100 + {};
-console.log(operacao);
+"use strict";
+// Annotation (anotação)
+const produto = "Livro";
+const preco = 200;
+const carro = {
+    marca: "Audi",
+    portas: 5,
+};
+const barato = preco < 400 ? true : "produto caro";
+//IMPORTANTE: As anotações serão necessárias quando lidamos com funções.
+function somar(a, b) {
+    return a + b;
+}
+somar(4, 10);
+// somar(4, '4');
+const nintendo = {
+    nome: "Nintendo",
+    preco: "2000",
+};
+function transformarPreco(produto) {
+    produto.preco = "R$ " + produto.preco;
+    return produto;
+}
+const produtoNovo = transformarPreco(nintendo);
+console.log(produtoNovo);
