@@ -1,35 +1,52 @@
-// Annotation (anotação)
-const produto: string = "Livro";
+// function normalizarTexto(texto) {
+//   return texto.trims().toLowercase();
+// }
 
-const preco: number = 200;
-
-const carro: {
-  marca: string;
-  portas: number;
-} = {
-  marca: "Audi",
-  portas: 5,
-};
-
-const barato = preco < 400 ? true : "produto caro";
-
-//IMPORTANTE: As anotações serão necessárias quando lidamos com funções.
-function somar(a: number, b: number) {
-  return a + b;
+function normalizarTexto(texto: string) {
+  return texto.trim().toLowerCase();
 }
 
-somar(4, 10);
-// somar(4, '4');
+console.log(normalizarTexto("DEsigN"));
 
-const nintendo = {
-  nome: "Nintendo",
-  preco: "2000",
-};
+// const input = document.querySelector("input");
+// const total = localStorage.getItem("total");
 
-function transformarPreco(produto: { nome: string; preco: string }) {
-  produto.preco = "R$ " + produto.preco;
-  return produto;
+// input.value = total;
+// calcularGanho(input.value);
+
+// function calcularGanho(value) {
+//   const p = document.querySelector("p");
+//   p.innerText = `Ganho total: ${value + 100 - value * 0.2}`;
+// }
+
+// function totalMudou() {
+//   const value = Number(input.value);
+//   localStorage.setItem("total", value);
+//   calcularGanho(value);
+// }
+
+// input.addEventListener("keyup", totalMudou);
+
+const input = document.querySelector("input");
+const total = localStorage.getItem("total");
+if (input && total) {
+  input.value = total;
+  calcularGanho(Number(input.value));
 }
 
-const produtoNovo = transformarPreco(nintendo);
-console.log(produtoNovo);
+function calcularGanho(value: number) {
+  const p = document.querySelector("p");
+  if (p) {
+    p.innerText = `Ganho total: ${value + 100 - value * 0.2}`;
+  }
+}
+
+function totalMudou() {
+  if (input) {
+    const value = Number(input.value);
+    localStorage.setItem("total", String(value));
+    calcularGanho(value);
+  }
+}
+
+input?.addEventListener("keyup", totalMudou);
