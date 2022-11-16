@@ -1,31 +1,31 @@
 "use strict";
-// Exercício
-// Defina a interface da API https://api.origamid.dev/json/cursos.json e mostre os dados na tela
-// Existem apenas dois nívies de cursos, Iniciante (iniciante) e Avançado (avancado). Se for para iniciante pinte o título de azul, para avançado pinte de vermelho.
-async function fetchCursos() {
-    const response = await fetch('https://api.origamid.dev/json/cursos.json');
-    const data = await response.json();
-    mostrarCursos(data);
+// Any - indica que o dado pode conter qualquer tipo de dado do TS.
+function normalizar(texto) {
+    return texto.trim().toLowerCase();
 }
-fetchCursos();
+console.log(normalizar(' DeSIGN'));
+// console.log(normalizar(200))
+// Uso do Any
+// Em alguns casos o any faz sentido, como no caso da função json() onde qualquer tipo de dado pode ser retornado, dependendo da API que acessarmos
+async function fetchJSON(url) {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+    manipularData(data);
+}
+fetchJSON("https://api.origamid.dev/json/cursos.json");
+function manipularData(data) {
+    console.log(data.nome);
+}
 function mostrarCursos(cursos) {
     cursos.forEach(curso => {
-        let color;
-        if (curso.nivel === 'iniciante') {
-            color = 'blue';
-        }
-        else if (curso.nivel === 'avancado') {
-            color = 'red';
-        }
         document.body.innerHTML += `
       <div>
-        <h2 style="color: ${color}">${curso.nome}</h2>
+        <h2>${curso.nome}</h2>
         <p>Horas: ${curso.horas}</p>
-        <p>Aulas: ${curso.aulas}</p>
-        <p>Tipo: ${curso.gratuito ? 'Gratuito' : 'Pago'}</p>
-        <p>Tags: ${curso.tags.join(', ')}</p>
-        <p>Aulas: ${curso.idAulas.join(' | ')}</p>
       </div>
     `;
     });
 }
+const dados = 'o any gera problemas';
+mostrarCursos(dados);
