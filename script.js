@@ -1,31 +1,28 @@
 "use strict";
-// Any - indica que o dado pode conter qualquer tipo de dado do TS.
-function normalizar(texto) {
-    return texto.trim().toLowerCase();
+// Null e undefined
+// null é um tipo primitivo que representa a ausência de valor. É comum em funções do DOM que fazem uma busca, retornarem null quando não são bem sucedidas
+const button = document.querySelector('button');
+const config = localStorage.getItem('config');
+if (button !== null) {
+    button.click();
 }
-console.log(normalizar(' DeSIGN'));
-// console.log(normalizar(200))
-// Uso do Any
-// Em alguns casos o any faz sentido, como no caso da função json() onde qualquer tipo de dado pode ser retornado, dependendo da API que acessarmos
-async function fetchJSON(url) {
-    const response = await fetch(url);
-    const data = await response.json();
-    console.log(data);
-    manipularData(data);
+if (button) {
+    button.click();
 }
-fetchJSON("https://api.origamid.dev/json/cursos.json");
-function manipularData(data) {
-    console.log(data.nome);
+button?.click();
+// undefined representa variáveis/propriedades que foram instanciadas, porém os seus valores ainda não foram definidos
+let total;
+if (total) {
+    console.log('total foi definido');
 }
-function mostrarCursos(cursos) {
-    cursos.forEach(curso => {
-        document.body.innerHTML += `
-      <div>
-        <h2>${curso.nome}</h2>
-        <p>Horas: ${curso.horas}</p>
-      </div>
-    `;
-    });
+else {
+    console.log('total nao foi definido');
 }
-const dados = 'o any gera problemas';
-mostrarCursos(dados);
+const livro = {};
+const jogo = {
+    nome: 'Ragnarok'
+};
+console.log(jogo.nome?.toLowerCase());
+console.log(livro.nome?.toLowerCase());
+// strictNullChecks
+// Sem o strictNullChecks como true, o TypeScript assume que qualquer valor pode incluir null | undefined e consequentemente para de checar casos onde realmente o null | undefined podem ser retornados
