@@ -1,19 +1,31 @@
 "use strict";
-// Arrays
-// Uma array é definida com o tipo de dado(s) que ela possui, seguida por [];
-const numeros = [10, 20, 30, 40, 50, 3];
-const valores = [10, "Taxas", 30, 40, 50, 3];
-function maiorQue10(data) {
-    return data.filter((item) => item > 10);
+// Exercício
+// Defina a interface da API https://api.origamid.dev/json/cursos.json e mostre os dados na tela
+// Existem apenas dois nívies de cursos, Iniciante (iniciante) e Avançado (avancado). Se for para iniciante pinte o título de azul, para avançado pinte de vermelho.
+async function fetchCursos() {
+    const response = await fetch('https://api.origamid.dev/json/cursos.json');
+    const data = await response.json();
+    mostrarCursos(data);
 }
-// function maiorQue10(data: number[]) {
-//   return data.filter((item) => item > 10);
-// }
-function filtrarValores(data) {
-    return data.filter((item) => typeof item === "number");
+fetchCursos();
+function mostrarCursos(cursos) {
+    cursos.forEach(curso => {
+        let color;
+        if (curso.nivel === 'iniciante') {
+            color = 'blue';
+        }
+        else if (curso.nivel === 'avancado') {
+            color = 'red';
+        }
+        document.body.innerHTML += `
+      <div>
+        <h2 style="color: ${color}">${curso.nome}</h2>
+        <p>Horas: ${curso.horas}</p>
+        <p>Aulas: ${curso.aulas}</p>
+        <p>Tipo: ${curso.gratuito ? 'Gratuito' : 'Pago'}</p>
+        <p>Tags: ${curso.tags.join(', ')}</p>
+        <p>Aulas: ${curso.idAulas.join(' | ')}</p>
+      </div>
+    `;
+    });
 }
-// function filtrarValores(data: (string | number)[]) {
-//   return data.filter((item) => typeof item === "number");
-// }
-console.log(maiorQue10(numeros));
-console.log(filtrarValores(valores));
