@@ -1,35 +1,31 @@
 "use strict";
 class Produto {
     nome;
-    preco;
-    constructor(nome, preco) {
+    constructor(nome) {
         this.nome = nome;
-        this.preco = preco;
-    }
-    precoReal() {
-        return `R$ ${this.preco}`;
     }
 }
-const livro = new Produto('A Guerra dos Tronos', 200);
-console.log(livro instanceof Produto);
-class Livro {
+const livro = new Produto('A Guerra dos Tronos');
+class Livro extends Produto {
     autor;
-    constructor(autor) {
+    constructor(nome, autor) {
+        super(nome);
         this.autor = autor;
     }
 }
-class Jogo {
+class Jogo extends Produto {
     jogadores;
-    constructor(jogadores) {
+    constructor(nome, jogadores) {
+        super(nome);
         this.jogadores = jogadores;
     }
 }
 function buscarProduto(busca) {
     if (busca === 'O Hobbit') {
-        return new Livro('J. R. R. Tolkien');
+        return new Livro('J. R. R. Tolkien', 'O Hobbit');
     }
     if (busca === 'Dark Souls') {
-        return new Jogo(1);
+        return new Jogo('Dark Souls', 1);
     }
     return null;
 }
@@ -40,3 +36,9 @@ if (produto instanceof Livro) {
 if (produto instanceof Jogo) {
     console.log(produto.jogadores);
 }
+if (produto instanceof Produto) {
+    console.log(produto.nome);
+}
+const honda = {
+    nome: 'Honda'
+};
