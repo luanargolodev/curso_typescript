@@ -1,39 +1,55 @@
-// Null e undefined
-// null é um tipo primitivo que representa a ausência de valor. É comum em funções do DOM que fazem uma busca, retornarem null quando não são bem sucedidas
-const button = document.querySelector('button')
-const config = localStorage.getItem('config')
+class Produto {
+  nome: string
+  preco: number
 
-if(button !== null) {
-  button.click()
+  constructor(nome: string, preco: number) {
+    this.nome = nome
+    this.preco = preco
+  }
+
+  precoReal() {
+    return `R$ ${this.preco}`
+  }
 }
 
-if(button) {
-  button.click()
+const livro = new Produto('A Guerra dos Tronos', 200)
+
+console.log(livro instanceof Produto)
+
+class Livro {
+  autor: string
+  
+  constructor(autor: string) {
+    this.autor = autor
+  }
 }
 
-button?.click()
+class Jogo {
+  jogadores: number
 
-// undefined representa variáveis/propriedades que foram instanciadas, porém os seus valores ainda não foram definidos
-let total
-if(total) {
-  console.log('total foi definido')
-} else {
-  console.log('total nao foi definido')
+  constructor(jogadores: number) {
+    this.jogadores = jogadores
+  }
 }
 
-// Propriedades opcionais
-// Podemos definir propriedades opcionais utilizando opcional?: string. Quando opcional, elas poderão sempre retornar como o valor definido ou undefined
-interface Product {
-  nome?: string;
+function buscarProduto(busca: string) {
+  if(busca === 'O Hobbit') {
+    return new Livro('J. R. R. Tolkien')
+  }
+
+  if(busca === 'Dark Souls') {
+    return new Jogo(1)
+  }
+
+  return null
 }
 
-const livro: Product = {}
-const jogo: Product = {
-  nome: 'Ragnarok'
+const produto = buscarProduto('Dark Souls')
+
+if(produto instanceof Livro) {
+  console.log(produto.autor)
 }
 
-console.log(jogo.nome?.toLowerCase())
-console.log(livro.nome?.toLowerCase())
-
-// strictNullChecks
-// Sem o strictNullChecks como true, o TypeScript assume que qualquer valor pode incluir null | undefined e consequentemente para de checar casos onde realmente o null | undefined podem ser retornados
+if(produto instanceof Jogo) {
+  console.log(produto.jogadores)
+}
