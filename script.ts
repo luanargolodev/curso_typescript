@@ -1,8 +1,17 @@
 // Exercício
-// Selecione o link utilizando o método getElementsById
-// Substitua o href do link (HTMLAnchorElement) de http:// para https://
+// Selecione os elementos com a classe link
+// Crie uma função que deve ser executada para cada elemento
+// Modificar através da função o estilo da color e border
 
-const $link = document.getElementById('origamid')
-if($link instanceof HTMLAnchorElement) {
-  $link.href = $link.href.replace('http://', 'https://');
+const links = document.querySelectorAll(".link");
+
+function handleLink(link: HTMLElement) {
+  link.style.color = "red";
+  link.style.border = "1px solid red";
 }
+
+links.forEach((link) => {
+  if (link instanceof HTMLElement) {
+    handleLink(link);
+  }
+});
