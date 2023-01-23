@@ -1,3 +1,6 @@
+import coinsToNumber from "./coinsToNumber.js"
+import stringToDate from "./stringToDate.js"
+
 type TransactionPayment = "Boleto" | "Cartão de Crédito"
 type TransactionStatus =
   | "Paga"
@@ -32,11 +35,11 @@ export default function normalizeTransaction(transaction: TransactionAPI) {
   return {
     name: transaction.Nome,
     id: transaction.ID,
-    date: new Date(transaction.Data),
+    date: stringToDate(transaction.Data),
     status: transaction.Status,
     email: transaction.Email,
     coin: transaction["Valor (R$)"],
-    value: 0,
+    value: coinsToNumber(transaction["Valor (R$)"]),
     payment: transaction["Forma de Pagamento"],
     new: Boolean(transaction["Cliente Novo"]),
   }
