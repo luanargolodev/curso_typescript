@@ -20,8 +20,8 @@ export interface TransactionAPI {
 }
 
 export interface Transaction {
-  nome: string
-  id: string
+  name: string
+  id: number
   date: Date
   status: TransactionStatus
   email: string
@@ -31,7 +31,9 @@ export interface Transaction {
   new: boolean
 }
 
-export default function normalizeTransaction(transaction: TransactionAPI) {
+export default function normalizeTransaction(
+  transaction: TransactionAPI
+): Transaction {
   return {
     name: transaction.Nome,
     id: transaction.ID,

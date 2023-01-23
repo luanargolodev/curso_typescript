@@ -1,5 +1,8 @@
 import fetchData from "./fetchData.js"
-import normalizeTransaction, { TransactionAPI } from "./normalizeTransaction.js"
+import normalizeTransaction, {
+  Transaction,
+  TransactionAPI,
+} from "./normalizeTransaction.js"
 
 async function handleData() {
   const data = await fetchData<TransactionAPI[]>(
@@ -9,9 +12,23 @@ async function handleData() {
   if (!data) return
 
   const transactions = data.map(normalizeTransaction)
+  fillTable(transactions)
+}
 
-  transactions.forEach((item) => {
-    console.log(item.date.getHours())
+function fillTable(transaction: Transaction[]): void {
+  const $table = document.querySelector("#transactions tbody")
+  if (!$table) return
+
+  transaction.forEach((transaction) => {
+    $table.innerHTML += `
+      <tr>
+        <td>${transaction.name}</td>
+        <td>${transaction.email}</td>
+        <td>R$ ${transaction.value}</td>
+        <td>${transaction.payment}</td>
+        <td>${transaction.status}</td>
+      </tr>
+    `
   })
 }
 
