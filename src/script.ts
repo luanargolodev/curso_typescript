@@ -19,6 +19,10 @@ async function handleData() {
 
 function fillStatics(transaction: Transaction[]): void {
   const data = new Statistics(transaction)
+
+  console.log(data.payment)
+  console.log(data.status)
+
   const $total = document.querySelector<HTMLElement>("#total span")
 
   if ($total) {
