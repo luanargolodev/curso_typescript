@@ -9,11 +9,19 @@ async function handleData() {
     fillTable(transactions);
     fillStatics(transactions);
 }
+function fillList(list, containerId) {
+    const $container = document.querySelector(`#${containerId}`);
+    if ($container) {
+        Object.keys(list).forEach((key) => {
+            $container.innerHTML += `<p>${key}: ${list[key]}`;
+        });
+    }
+}
 function fillStatics(transaction) {
     const data = new Statistics(transaction);
-    console.log(data.payment);
-    console.log(data.status);
     const $total = document.querySelector("#total span");
+    fillList(data.payment, "payments");
+    fillList(data.status, "status");
     if ($total) {
         $total.innerText = data.total.toLocaleString("pt-BR", {
             style: "currency",
