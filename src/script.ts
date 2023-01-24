@@ -3,6 +3,7 @@ import normalizeTransaction, {
   Transaction,
   TransactionAPI,
 } from "./normalizeTransaction.js"
+import Statistics from "./Statistics.js"
 
 async function handleData() {
   const data = await fetchData<TransactionAPI[]>(
@@ -13,6 +14,19 @@ async function handleData() {
 
   const transactions = data.map(normalizeTransaction)
   fillTable(transactions)
+  fillStatics(transactions)
+}
+
+function fillStatics(transaction: Transaction[]): void {
+  const data = new Statistics(transaction)
+  const $total = document.querySelector<HTMLElement>("#total span")
+
+  if ($total) {
+    $total.innerText = data.total.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    })
+  }
 }
 
 function fillTable(transaction: Transaction[]): void {
