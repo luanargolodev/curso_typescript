@@ -30,9 +30,14 @@ function fillList(list: CountList, containerId: string) {
 function fillStatics(transaction: Transaction[]): void {
   const data = new Statistics(transaction)
   const $total = document.querySelector<HTMLElement>("#total span")
+  const $bestDay = document.querySelector<HTMLElement>("#bestDay span")
 
   fillList(data.payment, "payments")
   fillList(data.status, "status")
+
+  if ($bestDay) {
+    $bestDay.innerText = data.bestDay[0]
+  }
 
   if ($total) {
     $total.innerText = data.total.toLocaleString("pt-BR", {

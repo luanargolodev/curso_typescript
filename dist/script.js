@@ -20,8 +20,12 @@ function fillList(list, containerId) {
 function fillStatics(transaction) {
     const data = new Statistics(transaction);
     const $total = document.querySelector("#total span");
+    const $bestDay = document.querySelector("#bestDay span");
     fillList(data.payment, "payments");
     fillList(data.status, "status");
+    if ($bestDay) {
+        $bestDay.innerText = data.bestDay[0];
+    }
     if ($total) {
         $total.innerText = data.total.toLocaleString("pt-BR", {
             style: "currency",
